@@ -37,10 +37,6 @@ jobs:
   deploy:
     name: deploy
     runs-on: ubuntu-18.04
-    defaults:
-      run:
-        shell: bash
-        working-directory: /home/runner/work/aws-training/aws-training/
     needs: test
     strategy:
       matrix:
@@ -52,9 +48,11 @@ jobs:
         with:
           node-version: ${{ matrix.node-version }}
       - run: npm install
-      - run: node ./node_modules/serverless/bin/serverless.js plugin install -n serverless-bundle
-      - run: node ./node_modules/serverless/bin/serverless.js config credentials --provider aws --key ${{ secrets.AWS_ACCESS_KEY_ID }} --secret ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-      - run: node ./node_modules/serverless/bin/serverless.js deploy --verbose --stage=dev
+      - name: serverless deploy
+        uses: serverless/github-action@v3
+        with:
+          args: -c "cd /home/runner/work/aws-training/aws-training/ && serverless deploy --stage=dev --verbose"
+          entrypoint: /bin/sh
         env:
           AWS_ACCESS_KEY_ID:  ${{ secrets.AWS_ACCESS_KEY_ID }}
           AWS_SECRET_ACCESS_KEY:  ${{ secrets.AWS_SECRET_ACCESS_KEY }}
