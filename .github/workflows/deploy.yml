@@ -8,7 +8,7 @@ on:
 jobs:
   python-env:
     name: python-env
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-18.04
     strategy:
       matrix:
         python-version: ['3.x']
@@ -26,8 +26,8 @@ jobs:
           pip install -r ./requirements.txt
   test:
     name: test
+    runs-on: ubuntu-18.04
     needs: python-env
-    runs-on: ubuntu-lastest
     steps:
       - uses: actions/checkout@v3
       - name: Test with pytest
@@ -36,8 +36,8 @@ jobs:
           pytest ./unit
   deploy:
     name: deploy
+    runs-on: ubuntu-18.04
     needs: test
-    runs-on: ubuntu-lastest
     strategy:
       matrix:
         node-version: [14.x]
