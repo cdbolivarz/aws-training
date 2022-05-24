@@ -53,4 +53,4 @@ jobs:
 # Run Unit tests- Specify unit tests here 
 
 # sam deploy
-      - run: sam deploy --region sa-east-1 --stage dev
+      - run: sam deploy --region sa-east-1 --parameter-overrides Environment="dev"
