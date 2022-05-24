@@ -33,7 +33,7 @@ jobs:
       - name: Test with pytest
         run: |
           pip install pytest
-          pytest unit
+          pytest ./unit
   deploy:
     name: deploy
     needs: test
