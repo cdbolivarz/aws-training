@@ -12,10 +12,8 @@ jobs:
     with:
       stage: dev
     - name: Test with pytest
-      run: |
-        pip install pytest
-        pip install pytest-cov
-        pytest unit
+    - run: pip install pytest
+    - run: pytest unit
   deploy:
     name: deploy
     needs: test
