@@ -6,14 +6,36 @@ on:
       - main
 
 jobs:
+  python-env:
+    name: python-env
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python-version: ['3.x']
+        exclude:
+          - os: macos-latest
+            python-version: '3.8'
+          - os: windows-latest
+            python-version: '3.6'
+    steps:
+      - uses: actions/checkout@v3
+      - name: Set up Python
+        uses: actions/setup-python@v3
+        with:
+          python-version: ${{ matrix.python-version }}
+      - name: Display Python version
+        run: python --version
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r ./requirements.txt
   test:
     name: test
-    uses: ./.github/workflows/build.yml
-    with:
-      stage: dev
-    - name: Test with pytest
-    - run: pip install pytest
-    - run: pytest unit
+    needs: python-env
+    steps:
+      - name: Test with pytest
+      - run: pip install pytest
+      - run: pytest unit
   deploy:
     name: deploy
     needs: test
