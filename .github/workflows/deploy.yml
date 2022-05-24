@@ -12,11 +12,6 @@ jobs:
     strategy:
       matrix:
         python-version: ['3.x']
-        exclude:
-          - os: macos-latest
-            python-version: '3.8'
-          - os: windows-latest
-            python-version: '3.6'
     steps:
       - uses: actions/checkout@v3
       - name: Set up Python
