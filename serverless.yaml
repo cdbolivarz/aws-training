@@ -20,8 +20,8 @@ provider:
   iam:
     role:
       managedPolicies:
-      - arn:aws:iam:aws:policy/service-role/AWSLambdaBasicExecutionRole
-      - arn:aws:iam:aws:policy/AmazonS3FullAccess
+      - arn:aws:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole
+      - arn:aws:iam::aws:policy/AmazonS3FullAccess
 
 functions:
   - HelloWorldFunction:
