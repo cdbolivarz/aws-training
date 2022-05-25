@@ -1,6 +1,6 @@
 service: app
 
-frameworkVersion: '2'
+frameworkVersion: '3'
 
 
 
@@ -31,3 +31,12 @@ functions:
             path: helloworld
             cors: true
             method: get
+
+custom:
+  pythonRequirements:
+    dockerizePip: true
+    layer:
+      name: ${self:service}-${self:provider.stage}-python-libraries
+      description: "Layer with libraries"
+      compatibleRuntimes:
+        - python3.9
