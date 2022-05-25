@@ -9,7 +9,7 @@ plugins:
 
 provider:
   name: aws
-  runtime: python3.9
+  runtime: python3.8
   lambdaHashingVersion: 20201221
   region: ${file(./variables.json):AWSREGION}
   stage: ${file(./variables.json):AWSSTAGE}
@@ -39,4 +39,4 @@ custom:
       name: ${self:service}-${self:provider.stage}-python-libraries
       description: "Layer with libraries"
       compatibleRuntimes:
-        - python3.9
+        - python3.8
