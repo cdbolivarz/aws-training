@@ -5,16 +5,6 @@ Description: >
 
   Sample SAM Template for sam-app
 
-Parameters:
-  Environment:
-    Type: String
-    Description: Which environment do you want to deploy to? (local,dev,stage, or prod)
-    AllowedValues:
-    - qa
-    - dev
-    - prod
-    Default: dev
-
 # More info about Globals: https://github.com/awslabs/serverless-application-model/blob/master/docs/globals.rst
 Globals:
   Function:
@@ -27,6 +17,12 @@ Globals:
 plugins:
   - serverless-python-requirements
 
+provider:
+  name: aws
+  runtime: python3.9
+  lambdaHashingVersion: 20201221
+  region: ${file(./variables.json):AWSREGION}
+  stage: dev
 
 Resources:
   HelloWorldFunction:
