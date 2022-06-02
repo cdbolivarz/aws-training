@@ -7,14 +7,14 @@ def test_decorator(new_key):
     def decorator(fn):
         def wrapper(*args, **kwargs):
             print("before")
-            return fn(*args, **kwargs)
-        print("after", new_key)
+            response = fn(*args, **kwargs)
+            print("after", new_key)
+            return response
         return wrapper
-
     return decorator
 
 @test_decorator(new_key= 1)
-def lambda_handler(event, context):
+def lambda_handler(event=None, context=None):
     """Sample pure Lambda function
 
     Parameters
