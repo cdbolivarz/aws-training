@@ -6,7 +6,7 @@ import json
 def test_decorator(new_key):
     def decorator(fn):
         def wrapper(*args, **kwargs):
-            print(kwargs['event'])
+            print(args[0])
             response = fn(*args, **kwargs)
             print("after", new_key)
             return response
