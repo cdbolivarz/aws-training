@@ -2,7 +2,18 @@ import json
 
 # import requests
 
+ 
+def test_decorator(new_key):
+    def decorator(fn):
+        def wrapper(*args, **kwargs):
+            print("before")
+            return fn(*args, **kwargs)
+        return wrapper
+    print("after", new_key)
 
+    return decorator
+
+@test_decorator(new_key= 1)
 def lambda_handler(event, context):
     """Sample pure Lambda function
 
@@ -37,7 +48,7 @@ def lambda_handler(event, context):
         "statusCode": 200,
         "body": json.dumps(
             {
-                "message": "hello worl",
+                "message": "hello world",
                 # "location": ip.text.replace("\n", "")
             }
         ),
