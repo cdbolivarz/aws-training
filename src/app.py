@@ -8,8 +8,8 @@ def test_decorator(new_key):
         def wrapper(*args, **kwargs):
             print("before")
             return fn(*args, **kwargs)
+        print("after", new_key)
         return wrapper
-    print("after", new_key)
 
     return decorator
 
